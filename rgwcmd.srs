@@ -1,0 +1,5 @@
+Python script
+
+rgwcmd --configure >> configure server, port, admin user, secret and key   AND store in .configure
+
+create users > grant priv
