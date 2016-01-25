@@ -69,6 +69,8 @@ radosgw-admin user suspend | enable --uid=johndoe
 **Remove a User**
 ```
 radosgw-admin user rm --uid=johndoe
+
+radosgw-admin user rm --uid=johnny --purge-data
 ```
 
 **Create a Key**
@@ -146,4 +148,25 @@ radosgw-admin usage show --show-log-entries=false
 radosgw-admin usage trim --start-date=2010-01-01 --end-date=2010-12-31
 radosgw-admin usage trim --uid=johndoe
 radosgw-admin usage trim --uid=johndoe --end-date=2013-12-31
+```
+
+**Remove a Bucket**
+```
+radosgw-admin bucket unlink --bucket=foo
+```
+
+**Show logs of a bucket**
+```
+radosgw-admin log show --bucket=foo --date=2012-04-01
+```
+
+---
+
+## [REST API](http://docs.ceph.com/docs/master/radosgw/adminops/)
+
+1. Get Usage
+   Request bandwidth usage information.
+```
+GET /{admin}/usage?format=json    HTTP/1.1
+Host: {fqdn}
 ```
