@@ -1,0 +1,6 @@
+argparse==1.2.1
+boto==2.39.0
+requests==2.9.1
+requests-aws==0.1.8
+rgwadmin==1.1.1
+wsgiref==0.1.2
