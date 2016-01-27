@@ -1,8 +1,5 @@
 """User service for Ceph RADOS Gateway (radosgw)."""
 
-# import requests
-# from awsauth import S3Auth
-
 class User:
 
     def __init__(self, uid='', display_name='', email='', access_key='',
@@ -44,7 +41,7 @@ class User:
             param_string += 'user-caps=' + user_caps + '&'
 
         if max_buckets:
-            param_string += 'max-buckets=' + max_buckets + '&'
+            param_string += 'max-buckets=' + str(max_buckets) + '&'
 
         if suspended:
             param_string += 'suspended=' + suspended + '&'
