@@ -1,2 +1,4 @@
 rgwcmd-venv/
 venv/
+*test.py
+*.pyc
