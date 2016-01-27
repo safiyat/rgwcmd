@@ -14,7 +14,7 @@ class Connection:
         else:
             self._protocol = 'http'
 
-        self.auth = S3Auth(access_key = self._access_key, secret_key = self._secret_key, server=self._server)
+        self.auth = S3Auth(access_key = self._access_key, secret_key = self._secret_key)
 
     def __repr__(self):
         return '<%s:%s>' % (self.__class__.__name__, self.host)
@@ -74,3 +74,5 @@ class Connection:
 
         url = self.get_base_url() + endpoint + '?' + params
         response = requests.request(method=method, url=url, auth=self.auth)
+
+        return response
