@@ -66,7 +66,7 @@ class User:
         # if access_key and secret_key:
         method = 'PUT'
         endpoint = '/admin/user'
-        params = build_params(uid=uid, display_name=display_name, email=email,
+        params = self.build_params(uid=uid, display_name=display_name, email=email,
                                access_key=access_key, secret_key=secret_key,
                                user_caps=user_caps, max_buckets=max_buckets,
                                suspended=suspended)
@@ -80,7 +80,7 @@ class User:
         # if access_key and secret_key:
         method = 'POST'
         endpoint = '/admin/user'
-        params = build_params(uid=uid, display_name=display_name, email=email,
+        params = self.build_params(uid=uid, display_name=display_name, email=email,
                                access_key=access_key, secret_key=secret_key,
                                user_caps=user_caps, max_buckets=max_buckets,
                                suspended=suspended)
@@ -92,7 +92,7 @@ class User:
         """Delete a user."""
         method = 'DELETE'
         endpoint = '/admin/user'
-        params = build_params(uid=uid, purge_data=purge_data)
+        params = self.build_params(uid=uid, purge_data=purge_data)
 
         return method, endpoint, params
 
@@ -100,9 +100,9 @@ class User:
     def add_key(self, uid, access_key='', secret_key='', generate_key=''):
         """Add a key-pair for a user"""
         if generate_key:
-            params = 'generate-key=True&' + build_params(uid=uid)
+            params = 'generate-key=True&' + self.build_params(uid=uid)
         else:
-            params = build_params(uid=uid, access_key=access_key, secret_key=secret_key)
+            params = self.build_params(uid=uid, access_key=access_key, secret_key=secret_key)
 
         method = 'PUT'
         endpoint = '/admin/user'
@@ -126,7 +126,7 @@ class User:
 
         method = 'PUT'
         endpoint = '/admin/user'
-        params = 'caps&' + build_params(uid=uid, user_caps=user_caps)
+        params = 'caps&' + self.build_params(uid=uid, user_caps=user_caps)
 
         return method, endpoint, params
 
@@ -136,6 +136,6 @@ class User:
 
         method = 'DELETE'
         endpoint = '/admin/user'
-        params = 'caps&' + build_params(uid=uid, user_caps=user_caps)
+        params = 'caps&' + self.build_params(uid=uid, user_caps=user_caps)
 
         return method, endpoint, params
