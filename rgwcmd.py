@@ -92,6 +92,37 @@ user_create_parser.add_argument('-x', '--suspend', type=str, required=False,
                              help='Suspend the user being created.',
                              metavar='False', dest='suspend')
 
+
+user_update_parser.add_argument('-u', '--uid', type=str, required=True,
+                             help='The user ID of the user to be updated.',
+                             metavar='johnny', dest='uid')
+user_update_parser.add_argument('-d', '--display-name', type=str, required=False,
+                             help='The display name of the user to be updated.',
+                             metavar='"Johnny Lever"', dest='dispname')
+user_update_parser.add_argument('-e', '--email', type=str, required=False,
+                             help='The email of the user to be updated.',
+                             metavar='lever.johhny@example.com', dest='email')
+user_update_parser.add_argument('-a', '--access-key', type=str, required=False,
+                             help='The access-key of the user to be updated.',
+                             metavar='ABCD0EF12GHIJ2K34LMN', dest='access_key')
+user_update_parser.add_argument('-s', '--secret-key', type=str, required=False,
+                             help='The secret-key of the user being updated.',
+                             metavar='0AbCDEFg1h2i34JklM5nop6QrSTUV+WxyzaBC7D8',
+                             dest='secret_key')
+user_update_parser.add_argument('-c', '--caps', type=str, required=False,
+                             help='The user capabilities of the user being updated.',
+                             metavar='"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]"',
+                             dest='caps')
+user_update_parser.add_argument('-g', '--generate-key', type=str, required=False,
+                             help='Generate the key pair for the user being updated.',
+                             metavar='True', dest='gen_key')
+user_update_parser.add_argument('-m', '--max-buckets', type=str, required=False,
+                             help='The max buckets allowed to the user being updated.',
+                             metavar='500', dest='max_buckets')
+user_update_parser.add_argument('-x', '--suspend', type=str, required=False,
+                             help='Suspend the user being updated.',
+                             metavar='False', dest='suspend')
+
 # try:
 #     args = parser.parse_args()
 #     args.func(args)
