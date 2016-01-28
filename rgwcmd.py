@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 
-from rgwcmd import argparse
+from rgwcmd import argparsen
 
+import requests
+import json
 # if __name__ == '__main__':
 
 def user_func(args):
@@ -31,7 +33,7 @@ def caps_func(args):
         print 'caps rm'
 
 
-parser = argparse.ArgumentParser(description='Ceph Rados Gateway REST API on the cmd.')
+parser = argparsen.ArgumentParser(description='Ceph Rados Gateway REST API on the cmd.')
 subparsers = parser.add_subparsers(dest='command')
 
 user_parser = subparsers.add_parser('user')
