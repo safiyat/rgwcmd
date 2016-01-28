@@ -42,13 +42,20 @@ def user_func(args):
                                                    user_caps=args.caps,
                                                    max_buckets=args.max_buckets,
                                                    suspended=args.suspend)
-        conn.request(method=method, endpoint=endpoint, params=params)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
+
 
     if args.subcommand == 'rm':
         usr = User()
         method, endpoint, params = usr.remove_user(uid=args.uid,
                                                    purge_data=args.purge)
-        conn.request(method=method, endpoint=endpoint, params=params)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
 
     if args.subcommand == 'update':
         usr = User()
@@ -61,7 +68,10 @@ def user_func(args):
                                                    user_caps=args.caps,
                                                    max_buckets=args.max_buckets,
                                                    suspended=args.suspend)
-        conn.request(method=method, endpoint=endpoint, params=params)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
 
 def key_func(args):
     if args.subcommand == 'add':
@@ -69,15 +79,20 @@ def key_func(args):
         method, endpoint, params = usr.add_key(uid=args.uid,
                                                access_key=args.access_key,
                                                secret_key=args.secret_key,
-                                               generate_key=args.gen_key,
-                                               suspended=args.suspend)
-        conn.request(method=method, endpoint=endpoint, params=params)
+                                               generate_key=args.gen_key)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
 
     if args.subcommand == 'rm':
         usr = User()
         method, endpoint, params = usr.remove_key(access_key=args.access_key,
                                                   uid=args.uid)
-        conn.request(method=method, endpoint=endpoint, params=params)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
 
 
 def caps_func(args):
@@ -85,12 +100,19 @@ def caps_func(args):
         usr = User()
         method, endpoint, params = usr.add_caps(uid=args.uid,
                                                 user_caps=args.caps)
-        conn.request(method=method, endpoint=endpoint, params=params)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
+
     if args.subcommand == 'rm':
         usr = User()
         method, endpoint, params = usr.remove_caps(uid=args.uid,
                                                 user_caps=args.caps)
-        conn.request(method=method, endpoint=endpoint, params=params)
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
 
 
 
