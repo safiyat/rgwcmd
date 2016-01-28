@@ -2,3 +2,4 @@ rgwcmd-venv/
 venv/
 *test.py
 *.pyc
+standalone.py

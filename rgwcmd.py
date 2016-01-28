@@ -71,60 +71,110 @@ user_create_parser.add_argument('-d', '--display-name', type=str, required=True,
                              help='The display name of the user to be created.',
                              metavar='"Johnny Lever"', dest='dispname')
 user_create_parser.add_argument('-e', '--email', type=str, required=False,
-                             help='The email of the user to be created.',
+                             help='The email address associated with the user.',
                              metavar='lever.johhny@example.com', dest='email')
 user_create_parser.add_argument('-a', '--access-key', type=str, required=False,
-                             help='The access-key of the user to be created.',
+                             help='Specify access key.',
                              metavar='ABCD0EF12GHIJ2K34LMN', dest='access_key')
 user_create_parser.add_argument('-s', '--secret-key', type=str, required=False,
-                             help='The secret-key of the user being created.',
+                             help='Specify secret key.',
                              metavar='0AbCDEFg1h2i34JklM5nop6QrSTUV+WxyzaBC7D8',
                              dest='secret_key')
 user_create_parser.add_argument('-c', '--caps', type=str, required=False,
-                             help='The user capabilities of the user being created.',
+                             help='User capabilities.',
                              metavar='"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]"',
                              dest='caps')
 user_create_parser.add_argument('-g', '--generate-key', type=str, required=False,
-                             help='Generate the key pair for the user being created.',
+                             help='Generate a new key pair and add to the existing keyring.',
                              metavar='True', dest='gen_key')
 user_create_parser.add_argument('-m', '--max-buckets', type=str, required=False,
-                             help='The max buckets allowed to the user being created.',
+                             help='Specify the maximum number of buckets the user can own.',
                              metavar='500', dest='max_buckets')
 user_create_parser.add_argument('-x', '--suspend', type=str, required=False,
-                             help='Suspend the user being created.',
+                             help='Specify whether the user should be suspended.',
                              metavar='False', dest='suspend')
 
 
 user_update_parser.add_argument('-u', '--uid', type=str, required=True,
-                             help='The user ID of the user to be updated.',
+                             help='The user ID to be modified.',
                              metavar='johnny', dest='uid')
 user_update_parser.add_argument('-d', '--display-name', type=str, required=False,
-                             help='The display name of the user to be updated.',
+                             help='The display name of the user to be modified.',
                              metavar='"Johnny Lever"', dest='dispname')
 user_update_parser.add_argument('-e', '--email', type=str, required=False,
-                             help='The email of the user to be updated.',
+                             help='The email address to be associated with the user.',
                              metavar='lever.johhny@example.com', dest='email')
 user_update_parser.add_argument('-a', '--access-key', type=str, required=False,
-                             help='The access-key of the user to be updated.',
+                             help='Specify access key.',
                              metavar='ABCD0EF12GHIJ2K34LMN', dest='access_key')
 user_update_parser.add_argument('-s', '--secret-key', type=str, required=False,
-                             help='The secret-key of the user being updated.',
+                             help='Specify secret key.',
                              metavar='0AbCDEFg1h2i34JklM5nop6QrSTUV+WxyzaBC7D8',
                              dest='secret_key')
 user_update_parser.add_argument('-c', '--caps', type=str, required=False,
-                             help='The user capabilities of the user being updated.',
+                             help='User capabilities.',
                              metavar='"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]"',
                              dest='caps')
 user_update_parser.add_argument('-g', '--generate-key', type=str, required=False,
-                             help='Generate the key pair for the user being updated.',
+                             help='Generate a new key pair and add to the existing keyring.',
                              metavar='True', dest='gen_key')
 user_update_parser.add_argument('-m', '--max-buckets', type=str, required=False,
-                             help='The max buckets allowed to the user being updated.',
+                             help='Specify the maximum number of buckets the user can own.',
                              metavar='500', dest='max_buckets')
 user_update_parser.add_argument('-x', '--suspend', type=str, required=False,
-                             help='Suspend the user being updated.',
+                             help='Specify whether the user should be suspended.',
                              metavar='False', dest='suspend')
 
+
+user_rm_parser.add_argument('-u', '--uid', type=str, required=True,
+                             help='The user ID to be removed.',
+                             metavar='johnny', dest='uid')
+user_rm_parser.add_argument('-p', '--purge-data', type=str, required=False,
+                             help='When specified the buckets and objects belonging to the user will also be removed.',
+                             metavar='True', dest='purge')
+
+
+
+
+key_add_parser.add_argument('-u', '--uid', type=str, required=True,
+                             help='The user ID to receive the new key.',
+                             metavar='johnny', dest='uid')
+key_add_parser.add_argument('-a', '--access-key', type=str, required=False,
+                             help='Specify the access key.',
+                             metavar='ABCD0EF12GHIJ2K34LMN', dest='access_key')
+key_add_parser.add_argument('-s', '--secret-key', type=str, required=False,
+                             help='Specify the secret key.',
+                             metavar='0AbCDEFg1h2i34JklM5nop6QrSTUV+WxyzaBC7D8',
+                             dest='secret_key')
+key_add_parser.add_argument('-g', '--generate-key', type=str, required=False,
+                             help='Generate a new key pair and add to the existing keyring.',
+                             metavar='True', dest='gen_key')
+
+key_rm_parser.add_argument('-a', '--access-key', type=str, required=True,
+                             help='The S3 access key belonging to the S3 key pair to remove.',
+                             metavar='ABCD0EF12GHIJ2K34LMN', dest='access_key')
+key_rm_parser.add_argument('-u', '--uid', type=str, required=False,
+                             help='The user to remove the key from.',
+                             metavar='johnny', dest='uid')
+
+
+
+
+caps_add_parser.add_argument('-u', '--uid', type=str, required=True,
+                             help='The user ID to add an administrative capability to.',
+                             metavar='johnny', dest='uid')
+caps_add_parser.add_argument('-c', '--caps', type=str, required=False,
+                             help='The administrative capability to add to the user.',
+                             metavar='"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]"',
+                             dest='caps')
+
+caps_rm_parser.add_argument('-u', '--uid', type=str, required=True,
+                             help='The user ID to remove an administrative capability from.',
+                             metavar='johnny', dest='uid')
+caps_rm_parser.add_argument('-c', '--caps', type=str, required=False,
+                             help='The administrative capabilities to remove from the user.',
+                             metavar='"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]"',
+                             dest='caps')
 # try:
 #     args = parser.parse_args()
 #     args.func(args)
