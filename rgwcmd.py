@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import argparse
+from rgwcmd import argparse
 
 # if __name__ == '__main__':
 
@@ -67,7 +67,7 @@ user_create_parser.add_argument('-u', '--uid', type=str, required=True,
                              metavar='johnny', dest='uid')
 user_create_parser.add_argument('-d', '--display-name', type=str, required=True,
                              help='The display name of the user to be created.',
-                             metavar='Johnny Lever', dest='dispname')
+                             metavar='"Johnny Lever"', dest='dispname')
 user_create_parser.add_argument('-e', '--email', type=str, required=False,
                              help='The email of the user to be created.',
                              metavar='lever.johhny@example.com', dest='email')
