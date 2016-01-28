@@ -72,7 +72,8 @@ class User:
 
     @staticmethod
     def update_user(self, uid, display_name='', email='', access_key='',
-                    secret_key='', user_caps='', max_buckets=1000, suspended=''):
+                    secret_key='', generate_key='', user_caps='',
+                    max_buckets=1000, suspended=''):
         """Update a user."""
         # if access_key and secret_key:
         method = 'POST'
@@ -81,6 +82,8 @@ class User:
                                access_key=access_key, secret_key=secret_key,
                                user_caps=user_caps, max_buckets=max_buckets,
                                suspended=suspended)
+        if generate_key:
+            params = 'generate-key=True&' + self.build_params(uid=uid)
 
         return method, endpoint, params
 
