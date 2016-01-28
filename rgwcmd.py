@@ -1,36 +1,112 @@
 #! /usr/bin/env python
 
-from rgwcmd import argparsen
+import ConfigParser
+import os
 
-import requests
-import json
-# if __name__ == '__main__':
+from rgwcmd import argparsen
+from rgwcmd.user import User
+from rgwcmd.connection import Connection
+
+
+def write_conf(host, access_key, secret_key):
+    conf = ConfigParser.ConfigParser()
+
+    conf.add_section('rgwadmin')
+    conf.set('rgwadmin', 'host', host)
+    conf.set('rgwadmin', 'access-key', access_key)
+    conf.set('rgwadmin', 'secret-key', secret_key)
+
+    with open(os.environ['HOME'] + '/.rgwadmin', 'w') as configfile:
+        conf.write(configfile)
+
+
+def read_conf():
+    conf = ConfigParser.ConfigParser()
+    conf.read(os.environ['HOME'] + '/.rgwadmin')
+
+    host = conf.get('rgwadmin', 'host')
+    access_key = conf.get('rgwadmin', 'access-key')
+    secret_key = conf.get('rgwadmin', 'secret-key')
+
+    return host, access_key, secret_key
+
 
 def user_func(args):
     if args.subcommand == 'create':
-        print 'user create'
+        usr = User()
+        method, endpoint, params = usr.create_user(uid=args.uid,
+                                                   display_name=args.dispname,
+                                                   email=args.email,
+                                                   access_key=args.access_key,
+                                                   secret_key=args.secret_key,
+                                                   user_caps=args.caps,
+                                                   max_buckets=args.max_buckets,
+                                                   suspended=args.suspend)
+        conn.request(method=method, endpoint=endpoint, params=params)
 
     if args.subcommand == 'rm':
-        print 'user rm'
+        usr = User()
+        method, endpoint, params = usr.remove_user(uid=args.uid,
+                                                   purge_data=args.purge)
+        conn.request(method=method, endpoint=endpoint, params=params)
 
     if args.subcommand == 'update':
-        print 'user update'
-
+        usr = User()
+        method, endpoint, params = usr.update_user(uid=args.uid,
+                                                   display_name=args.dispname,
+                                                   email=args.email,
+                                                   access_key=args.access_key,
+                                                   secret_key=args.secret_key,
+                                                   generate_key=args.gen_key,
+                                                   user_caps=args.caps,
+                                                   max_buckets=args.max_buckets,
+                                                   suspended=args.suspend)
+        conn.request(method=method, endpoint=endpoint, params=params)
 
 def key_func(args):
     if args.subcommand == 'add':
-        print 'key add'
+        usr = User()
+        method, endpoint, params = usr.add_key(uid=args.uid,
+                                               access_key=args.access_key,
+                                               secret_key=args.secret_key,
+                                               generate_key=args.gen_key,
+                                               suspended=args.suspend)
+        conn.request(method=method, endpoint=endpoint, params=params)
 
     if args.subcommand == 'rm':
-        print 'key rm'
+        usr = User()
+        method, endpoint, params = usr.remove_key(access_key=args.access_key,
+                                                  uid=args.uid)
+        conn.request(method=method, endpoint=endpoint, params=params)
 
 
 def caps_func(args):
     if args.subcommand == 'add':
-        print 'caps add'
-
+        usr = User()
+        method, endpoint, params = usr.add_caps(uid=args.uid,
+                                                user_caps=args.caps)
+        conn.request(method=method, endpoint=endpoint, params=params)
     if args.subcommand == 'rm':
-        print 'caps rm'
+        usr = User()
+        method, endpoint, params = usr.remove_caps(uid=args.uid,
+                                                user_caps=args.caps)
+        conn.request(method=method, endpoint=endpoint, params=params)
+
+
+
+# if __name__ == '__main__':
+
+if os.path.isfile(os.environ['HOME'] + '/.rgwadmin'):
+    host, access_key, secret_key = read_conf()
+    conn = Connection(access_key=access_key, secret_key=secret_key, server=host)
+else:
+    print "No config file found at '%s'" % (os.environ['HOME'] + '/.rgwadmin')
+    print "Entering one time configuration..."
+    host = raw_input("    Rados Gateway Server:")
+    access_key = raw_input("    Access Key:")
+    secret_key = raw_input("    Secret Key:")
+    write_conf(host=host, access_key=access_key, secret_key=secret_key)
+    conn = Connection(access_key=access_key, secret_key=secret_key, server=host)
 
 
 parser = argparsen.ArgumentParser(description='Ceph Rados Gateway REST API on the cmd.')
@@ -58,11 +134,6 @@ key_rm_parser = key_subparsers.add_parser('rm')
 caps_add_parser = caps_subparsers.add_parser('add')
 caps_rm_parser = caps_subparsers.add_parser('rm')
 
-
-# for temp_parser in user_create_parser, user_update_parser, user_rm_parser:
-#     temp_parser.add_argument('-u', '--uid', type=str, required=True,
-#                              help='The user ID to be created/removed/updated.',
-#                              metavar='johhny', dest='uid')
 
 user_create_parser.add_argument('-u', '--uid', type=str, required=True,
                              help='The user ID to be created.',
@@ -187,7 +258,7 @@ caps_rm_parser.add_argument('-c', '--caps', type=str, required=False,
 
 args = parser.parse_args()
 args.func(args)
-print args
+
 
 
 ########################## Pure Genius. Never delete. ##########################
