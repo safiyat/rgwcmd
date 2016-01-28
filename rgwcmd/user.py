@@ -56,7 +56,7 @@ class User:
     def check_params(self, param_string):
         pass
 
-    @staticmethod
+
     def create_user(self, uid, display_name, email='', access_key='',
                     secret_key='', user_caps='', max_buckets=1000, suspended=''):
         """Create a new user. By default, an S3 key pair will be created automatically."""
@@ -70,7 +70,7 @@ class User:
 
         return method, endpoint, params
 
-    @staticmethod
+
     def update_user(self, uid, display_name='', email='', access_key='',
                     secret_key='', generate_key='', user_caps='',
                     max_buckets=1000, suspended=''):
@@ -87,7 +87,7 @@ class User:
 
         return method, endpoint, params
 
-    @staticmethod
+
     def remove_user(self, uid, purge_data=''):
         """Delete a user."""
         method = 'DELETE'
@@ -96,7 +96,7 @@ class User:
 
         return method, endpoint, params
 
-    @staticmethod
+
     def add_key(self, uid, access_key='', secret_key='', generate_key=''):
         """Add a key-pair for a user"""
         if generate_key:
@@ -110,7 +110,7 @@ class User:
 
         return method, endpoint, params
 
-    @staticmethod
+
     def remove_key(self, access_key, uid=''):
         """Remove a key-pair from a user"""
 
@@ -120,7 +120,7 @@ class User:
 
         return method, endpoint, params
 
-    @staticmethod
+
     def add_caps(self, uid, user_caps):
         """Add an administrative capability to a specified user."""
 
@@ -130,7 +130,7 @@ class User:
 
         return method, endpoint, params
 
-    @staticmethod
+
     def remove_caps(self, uid, user_caps):
         """Remove an administrative capability from a specified user."""
 
