@@ -73,6 +73,15 @@ def user_func(args):
             print "OK"
         print response.text
 
+    if args.subcommand == 'info':
+        usr = User()
+        method, endpoint, params = usr.update_user(uid=args.uid)
+        method = 'GET'
+        response = conn.request(method=method, endpoint=endpoint, params=params)
+        if response.status_code == 200:
+            print "OK"
+        print response.text
+
 def key_func(args):
     if args.subcommand == 'add':
         usr = User()
@@ -149,6 +158,7 @@ caps_subparsers = caps_parser.add_subparsers(dest='subcommand')
 user_create_parser = user_subparsers.add_parser('create')
 user_update_parser = user_subparsers.add_parser('update')
 user_rm_parser = user_subparsers.add_parser('rm')
+user_info_parser = user_subparsers.add_parser('info')
 
 key_add_parser = key_subparsers.add_parser('add')
 key_rm_parser = key_subparsers.add_parser('rm')
@@ -225,6 +235,11 @@ user_rm_parser.add_argument('-u', '--uid', type=str, required=True,
 user_rm_parser.add_argument('-p', '--purge-data', type=str, required=False,
                              help='When specified the buckets and objects belonging to the user will also be removed.',
                              metavar='True', dest='purge')
+
+
+user_info_parser.add_argument('-u', '--uid', type=str, required=True,
+                             help='The user ID to be queried.',
+                             metavar='johnny', dest='uid')
 
 
 
