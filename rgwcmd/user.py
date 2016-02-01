@@ -20,13 +20,13 @@ class User(object):
 
         if access_key and secret_key:
             generate_key = False
-        else if access_key or secret_key:
+        elif access_key or secret_key:
             raise MissingKeys
-        else
+        else:
             generate_key = True
 
         endpoint = '/admin/user'
-        response = self._conn.request(method='PUT', endpoint, uid=uid,
+        response = self._conn.request(method='PUT', endpoint=endpoint, uid=uid,
                                       display_name=display_name,
                                       key_type=key_type, email=email,
                                       access_key=access_key,
@@ -44,13 +44,13 @@ class User(object):
 
         if access_key and secret_key:
             generate_key = False
-        else if access_key or secret_key:
+        elif access_key or secret_key:
             raise MissingKeys
-        else
+        else:
             generate_key = True
 
         endpoint = '/admin/user'
-        response = self._conn.request(method='POST', endpoint, uid=uid,
+        response = self._conn.request(method='POST', endpoint=endpoint, uid=uid,
                                       display_name=display_name,
                                       key_type=key_type, email=email,
                                       access_key=access_key,
