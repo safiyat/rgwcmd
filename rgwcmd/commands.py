@@ -1,9 +1,14 @@
 command_list = {
-    "commands": [{
+    "commands": [
+        {
+
         "user": {
-            "subcommands": [{
+            "subcommands": [
+                {
+
                 "create": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -12,7 +17,9 @@ command_list = {
                             "help": "The user ID to be created.",
                             "metavar": "johnny",
                             "dest": "uid"
+                        }
                         },
+                        {
                         "display-name" : {
                             "short": "-d",
                             "long": "--display-name",
@@ -22,7 +29,9 @@ command_list = {
                                      created.",
                             "metavar": "Johnny Lever",
                             "dest": "dispname"
+                        }
                         },
+                        {
                         "email" : {
                             "short": "-e",
                             "long": "--email",
@@ -32,7 +41,9 @@ command_list = {
                                      user.",
                             "metavar": "johnny.lever@example.com",
                             "dest": "email"
+                        }
                         },
+                        {
                         "access-key" : {
                             "short": "-a",
                             "long": "--access-key",
@@ -41,7 +52,9 @@ command_list = {
                             "help": "Specify access key.",
                             "metavar": "ABCD0EF12GHIJ2K34LMN",
                             "dest": "access_key"
+                        }
                         },
+                        {
                         "secret-key" : {
                             "short": "-s",
                             "long": "--secret-key",
@@ -51,7 +64,9 @@ command_list = {
                             "metavar": "0AbCDEFg1h2i34JklM5nop6QrSTUV+\
                                         WxyzaBC7D8",
                             "dest": "secret_key"
+                        }
                         },
+                        {
                         "generate-key" : {
                             "short": "-g",
                             "long": "--generate-key",
@@ -61,7 +76,9 @@ command_list = {
                                      existing keyring.",
                             "metavar": "True",
                             "dest": "gen_key"
+                        }
                         },
+                        {
                         "caps" : {
                             "short": "-c",
                             "long": "--caps",
@@ -70,7 +87,9 @@ command_list = {
                             "help": "User capabilities.",
                             "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
                             "dest": "caps"
+                        }
                         },
+                        {
                         "max-buckets" : {
                             "short": "-m",
                             "long": "--max-buckets",
@@ -80,7 +99,9 @@ command_list = {
                                      the user can own.",
                             "metavar": "500",
                             "dest": "max_buckets"
+                        }
                         },
+                        {
                         "suspend" : {
                             "short": "-x",
                             "long": "--suspend",
@@ -91,10 +112,15 @@ command_list = {
                             "metavar": "False",
                             "dest": "suspend"
                         }
-                    }]
+                        }
+                    ]
+                }
                 },
+                {
+
                 "update": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -103,7 +129,9 @@ command_list = {
                             "help": "The user ID to be created.",
                             "metavar": "johnny",
                             "dest": "uid"
+                        }
                         },
+                        {
                         "display-name" : {
                             "short": "-d",
                             "long": "--display-name",
@@ -113,7 +141,9 @@ command_list = {
                                      created.",
                             "metavar": "Johnny Lever",
                             "dest": "dispname"
+                        }
                         },
+                        {
                         "email" : {
                             "short": "-e",
                             "long": "--email",
@@ -123,7 +153,9 @@ command_list = {
                                      user.",
                             "metavar": "johnny.lever@example.com",
                             "dest": "email"
+                        }
                         },
+                        {
                         "access-key" : {
                             "short": "-a",
                             "long": "--access-key",
@@ -132,7 +164,9 @@ command_list = {
                             "help": "Specify access key.",
                             "metavar": "ABCD0EF12GHIJ2K34LMN",
                             "dest": "access_key"
+                        }
                         },
+                        {
                         "secret-key" : {
                             "short": "-s",
                             "long": "--secret-key",
@@ -142,7 +176,9 @@ command_list = {
                             "metavar": "0AbCDEFg1h2i34JklM5nop6QrSTUV+\
                                         WxyzaBC7D8",
                             "dest": "secret_key"
+                        }
                         },
+                        {
                         "generate-key" : {
                             "short": "-g",
                             "long": "--generate-key",
@@ -152,7 +188,9 @@ command_list = {
                                      existing keyring.",
                             "metavar": "True",
                             "dest": "gen_key"
+                        }
                         },
+                        {
                         "caps" : {
                             "short": "-c",
                             "long": "--caps",
@@ -161,7 +199,9 @@ command_list = {
                             "help": "User capabilities.",
                             "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
                             "dest": "caps"
+                        }
                         },
+                        {
                         "max-buckets" : {
                             "short": "-m",
                             "long": "--max-buckets",
@@ -171,7 +211,9 @@ command_list = {
                                      the user can own.",
                             "metavar": "500",
                             "dest": "max_buckets"
+                        }
                         },
+                        {
                         "suspend" : {
                             "short": "-x",
                             "long": "--suspend",
@@ -182,10 +224,15 @@ command_list = {
                             "metavar": "False",
                             "dest": "suspend"
                         }
-                    }]
+                        }
+                    ]
+                }
                 },
+                {
+
                 "rm": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -194,7 +241,9 @@ command_list = {
                             "help": "The user ID to be created.",
                             "metavar": "johnny",
                             "dest": "uid"
+                        }
                         },
+                        {
                         "purge-data" : {
                             "short": "-p",
                             "long": "--purge-data",
@@ -206,10 +255,15 @@ command_list = {
                             "metavar": "True",
                             "dest": "purge"
                         }
-                    }]
+                        }
+                    ]
+                }
                 },
+                {
+
                 "info": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -219,16 +273,25 @@ command_list = {
                             "metavar": "johnny",
                             "dest": "uid"
                         }
-                    }]
+                        }
+                    ]
                 }
-            }],
+                }
+
+             ],
             "function" : "user_func",
             "dest": "subcommand"
+        }
         },
+        {
+
         "keys": {
-            "subcommands": [{
+            "subcommands": [
+                {
+
                 "add": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -237,7 +300,9 @@ command_list = {
                             "help": "The user ID to receive the new key.",
                             "metavar": "johnny",
                             "dest": "uid"
+                        }
                         },
+                        {
                         "access-key" : {
                             "short": "-a",
                             "long": "--access-key",
@@ -246,7 +311,9 @@ command_list = {
                             "help": "Specify access key.",
                             "metavar": "ABCD0EF12GHIJ2K34LMN",
                             "dest": "access_key"
+                        }
                         },
+                        {
                         "secret-key" : {
                             "short": "-s",
                             "long": "--secret-key",
@@ -256,7 +323,9 @@ command_list = {
                             "metavar": "0AbCDEFg1h2i34JklM5nop6QrSTUV+\
                                         WxyzaBC7D8",
                             "dest": "secret_key"
+                        }
                         },
+                        {
                         "generate-key" : {
                             "short": "-g",
                             "long": "--generate-key",
@@ -267,10 +336,15 @@ command_list = {
                             "metavar": "True",
                             "dest": "gen_key"
                         }
-                    }]
+                        }
+                    ]
+                }
                 },
+                {
+
                 "rm": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "access-key" : {
                             "short": "-a",
                             "long": "--access-key",
@@ -279,7 +353,9 @@ command_list = {
                             "help": "Specify access key.",
                             "metavar": "ABCD0EF12GHIJ2K34LMN",
                             "dest": "access_key"
+                        }
                         },
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -289,16 +365,24 @@ command_list = {
                             "metavar": "johnny",
                             "dest": "uid"
                         }
-                    }]
+                        }
+                    ]
                 }
-            }],
+                }
+            ],
             "function" : "keys_func",
             "dest": "subcommand"
+        }
         },
+        {
+
         "caps": {
-            "subcommands": [{
+            "subcommands": [
+                {
+
                 "add": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -308,7 +392,9 @@ command_list = {
                                      to.",
                             "metavar": "johnny",
                             "dest": "uid"
+                        }
                         },
+                        {
                         "caps" : {
                             "short": "-c",
                             "long": "--caps",
@@ -318,10 +404,15 @@ command_list = {
                             "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
                             "dest": "caps"
                         }
-                    }]
+                        }
+                    ]
+                }
                 },
+                {
+
                 "rm": {
-                    "arguments": [{
+                    "arguments": [
+                        {
                         "uid" : {
                             "short": "-u",
                             "long": "--uid",
@@ -331,7 +422,9 @@ command_list = {
                                      from.",
                             "metavar": "johnny",
                             "dest": "uid"
+                        }
                         },
+                        {
                         "caps" : {
                             "short": "-c",
                             "long": "--caps",
@@ -341,12 +434,15 @@ command_list = {
                             "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
                             "dest": "caps"
                         }
-                    }]
+                        }
+                    ]
                 }
-            }],
+                }
+            ],
             "function" : "caps_func",
             "dest": "subcommand"
         }
-    }],
+        }
+    ],
     "dest": "command"
 }
