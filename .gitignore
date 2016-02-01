@@ -3,3 +3,6 @@ venv/
 *test.py
 *.pyc
 standalone.py
+*.swp
+*#
+*.#*
