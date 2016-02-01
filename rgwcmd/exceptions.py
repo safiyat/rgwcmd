@@ -1,7 +1,7 @@
 """ RGWCMD Exceptions """
 
 class RgwcmdException(RuntimeError):
-    """There was a unlabeled exception that was raised during your request"""
+    """There was an unlabeled exception that was raised during your request"""
 
 
 class AccessDenied(RgwcmdException):
@@ -10,6 +10,10 @@ class AccessDenied(RgwcmdException):
 
 class UserExists(RgwcmdException):
     """Attempt to create existing user."""
+
+
+class MissingKeys(RgwcmdException):
+    """Only access or secret key provided."""
 
 
 class InvalidAccessKey(RgwcmdException):

@@ -1,44 +1,67 @@
 """User service for Ceph RADOS Gateway (radosgw)."""
 
+from exceptions import *
+
 class User(object):
 
-    def __init__(self):
+    def __init__(self, connection):
         """User class constructor."""
+        self._conn = connection
         pass
 
     def check_params(self, param_string):
         pass
 
-    def create_user(self, uid, display_name, email=None, key_type='s3', access_key=None,
-                    secret_key=None, user_caps=None, generate_key=True, max_buckets=1000,
-                    suspended=False):
-        """Create a new user. By default, an S3 key pair will be created automatically."""
+    def create_user(self, uid, display_name, email=None, key_type='s3',
+                    access_key=None, secret_key=None, user_caps=None,
+                    generate_key=True, max_buckets=1000, suspended=False):
+        """Create a new user. By default, an S3 key pair will be created\
+           automatically."""
+
+        if access_key and secret_key:
+            generate_key = False
+        else if access_key or secret_key:
+            raise MissingKeys
+        else
+            generate_key = True
+
         endpoint = '/admin/user'
-        response = self._conn.request(method='PUT', endpoint, uid=uid, display_name=display_name,
-                                      key_type=key_type, email=email, access_key=access_key,
+        response = self._conn.request(method='PUT', endpoint, uid=uid,
+                                      display_name=display_name,
+                                      key_type=key_type, email=email,
+                                      access_key=access_key,
                                       secret_key=secret_key, user_caps=user_caps,
                                       generate_key=generate_key,
-                                      max_buckets=max_buckets, suspended=suspended)
-        # parse response
+                                      max_buckets=max_buckets,
+                                      suspended=suspended)
+        code, text = parse_response(response)
+        return code, text
 
-    def update_user(self, uid, display_name='', email='', access_key='',
-                    secret_key='', generate_key='', user_caps='',
-                    max_buckets=1000, suspended=''):
+    def update_user(self, uid, display_name=None, email=None, access_key=None,
+                    secret_key=None, generate_key=None, user_caps=None,
+                    max_buckets=1000, suspended=None):
         """Update a user."""
-        # if access_key and secret_key:
-        method = 'POST'
+
+        if access_key and secret_key:
+            generate_key = False
+        else if access_key or secret_key:
+            raise MissingKeys
+        else
+            generate_key = True
+
         endpoint = '/admin/user'
-        params = self.build_params(uid=uid, display_name=display_name, email=email,
-                               access_key=access_key, secret_key=secret_key,
-                               user_caps=user_caps, max_buckets=max_buckets,
-                               suspended=suspended)
-        if generate_key:
-            params = 'generate-key=True&' + self.build_params(uid=uid)
+        response = self._conn.request(method='POST', endpoint, uid=uid,
+                                      display_name=display_name,
+                                      key_type=key_type, email=email,
+                                      access_key=access_key,
+                                      secret_key=secret_key, user_caps=user_caps,
+                                      generate_key=generate_key,
+                                      max_buckets=max_buckets,
+                                      suspended=suspended)
+        code, text = parse_response(response)
+        return code, text
 
-        return method, endpoint, params
-
-
-    def remove_user(self, uid, purge_data=''):
+    def remove_user(self, uid, purge_data=None):
         """Delete a user."""
         method = 'DELETE'
         endpoint = '/admin/user'
@@ -47,7 +70,7 @@ class User(object):
         return method, endpoint, params
 
 
-    def add_key(self, uid, access_key='', secret_key='', generate_key=''):
+    def add_key(self, uid, access_key=None, secret_key=None, generate_key=None):
         """Add a key-pair for a user"""
         if generate_key:
             params = 'generate-key=True&' + self.build_params(uid=uid)
@@ -61,7 +84,7 @@ class User(object):
         return method, endpoint, params
 
 
-    def remove_key(self, access_key, uid=''):
+    def remove_key(self, access_key, uid=None):
         """Remove a key-pair from a user"""
 
         method = 'DELETE'

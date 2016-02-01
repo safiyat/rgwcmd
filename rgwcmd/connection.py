@@ -22,7 +22,7 @@ class Connection:
     def get_base_url(self):
         '''Return a base URL.  eg. https://ceph.server'''
         return self._base_url
- 
+
     def _get_request_url(self, endpoint):
         return '%s/%s' % (self._base_url, endpoint)
 
@@ -30,3 +30,9 @@ class Connection:
         """Send requests to ceph-rgw."""
         response = requests.request(method=method, url=self._get_request_url(endpoint), auth=self.auth, params=params)
         return response
+
+    def parse_response(self, response):
+        """Parse the response of Connection.request function"""
+        code = response.code
+        text = response.text
+        return code, text
