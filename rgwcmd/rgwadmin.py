@@ -23,20 +23,20 @@ class adminutils(object):
 
         if access_key and secret_key:
             generate_key = False
-        else if access_key or secret_key:
+        elif access_key or secret_key:
             raise MissingKeys
-        else
+        else:
             generate_key = True
 
         endpoint = '/admin/user'
         return conn.request_ok(method='PUT', endpoint=endpoint, uid=uid,
-                                      display_name=display_name,
-                                      key_type=key_type, email=email,
-                                      access_key=access_key,
-                                      secret_key=secret_key, user_caps=user_caps,
-                                      generate_key=generate_key,
-                                      max_buckets=max_buckets,
-                                      suspended=suspended)
+                               display_name=display_name,
+                               key_type=key_type, email=email,
+                               access_key=access_key,
+                               secret_key=secret_key, user_caps=user_caps,
+                               generate_key=generate_key,
+                               max_buckets=max_buckets,
+                               suspended=suspended)
 
     @staticmethod
     def update_user(uid, display_name=None, email=None, access_key=None,
@@ -46,27 +46,27 @@ class adminutils(object):
 
         if access_key and secret_key:
             generate_key = False
-        else if access_key or secret_key:
+        elif access_key or secret_key:
             raise MissingKeys
-        else
+        else:
             generate_key = True
 
         endpoint = '/admin/user'
         return conn.request_ok(method='POST', endpoint=endpoint, uid=uid,
-                                      display_name=display_name,
-                                      key_type=key_type, email=email,
-                                      access_key=access_key,
-                                      secret_key=secret_key, user_caps=user_caps,
-                                      generate_key=generate_key,
-                                      max_buckets=max_buckets,
-                                      suspended=suspended)
+                               display_name=display_name,
+                               key_type=key_type, email=email,
+                               access_key=access_key,
+                               secret_key=secret_key, user_caps=user_caps,
+                               generate_key=generate_key,
+                               max_buckets=max_buckets,
+                               suspended=suspended)
 
     @staticmethod
     def remove_user(uid, purge_data=None):
         """Delete a user."""
         endpoint = '/admin/user'
         return conn.request_ok(method='DELETE', endpoint=endpoint,
-				uid=uid, purge_data=purge_data)
+			       uid=uid, purge_data=purge_data)
 
     @staticmethod
     def add_key(uid, access_key=None, secret_key=None):
@@ -80,8 +80,8 @@ class adminutils(object):
 
         endpoint = '/admin/user'
         return conn.request_ok(method='PUT', endpoint=endpoint, uid=uid,
-                                access_key=access_key, secret_key=secret_key,
-                                generate_key=generate_key)
+                               access_key=access_key, secret_key=secret_key,
+                               generate_key=generate_key)
 
     @staticmethod
     def remove_key(uid, access_key):
