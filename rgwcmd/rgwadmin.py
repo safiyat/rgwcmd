@@ -14,8 +14,6 @@ def init_connection():
 
 class adminutils(object):
 
-    global conn
-
     @staticmethod
     def _print_response_msg(code, message):
         #(navneet) This method will be called by all static methods to print response to user.
