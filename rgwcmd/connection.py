@@ -37,6 +37,7 @@ class Connection(object):
 
     def _parse_response(self, response):
         """Parse the response of Connection.request function"""
+        #(navneet) check for return codes and raise exceptions with a message 
         code = response.code
         text = response.text
         return code, text

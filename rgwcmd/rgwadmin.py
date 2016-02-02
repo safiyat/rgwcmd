@@ -15,6 +15,10 @@ conn = init_connection()
 class adminutils(object):
 
     @staticmethod
+    def _print_response_msg(code, message):
+        #(navneet) This method will be called by all static methods to print response to user.
+
+    @staticmethod
     def create_user(uid, display_name, email=None, key_type='s3',
                     access_key=None, secret_key=None, user_caps=None,
                     generate_key=True, max_buckets=1000, suspended=False):

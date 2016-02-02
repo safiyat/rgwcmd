@@ -2,6 +2,16 @@
 
 class RgwcmdException(RuntimeError):
     """There was an unlabeled exception that was raised during your request"""
+    #(navneet) set message and code for each child exception before raising it.
+    def __init__(self, message="RADOS-GW error occured.", code=500)
+        self._msg = message
+        self._code = code
+
+    def get_message(self):
+        return self._msg
+
+    def get_code(self):
+        return self._code
 
 
 class AccessDenied(RgwcmdException):
