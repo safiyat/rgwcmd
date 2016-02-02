@@ -10,10 +10,11 @@ def init_connection():
     rgwconf = rgwconfig.rgwconfig()
     host, access_key, secret_key = rgwconf.read_conf()
     conn = connection.Connection(host, access_key, secret_key)
-
-conn = init_connection()
+    return conn
 
 class adminutils(object):
+
+    global conn
 
     @staticmethod
     def _print_response_msg(code, message):

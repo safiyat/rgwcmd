@@ -17,7 +17,7 @@ class Connection(object):
         self._base_url = '%s://%s' % (self._protocol, self._server)
 
     def __repr__(self):
-        return '<%s:%s>' % (self.__class__.__name__, self.host)
+        return '<%s:%s>' % (self.__class__.__name__, self._server)
 
     def get_base_url(self):
         '''Return a base URL.  eg. https://ceph.server'''
