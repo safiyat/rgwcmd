@@ -4,11 +4,12 @@ from exceptions import *
 
 import connection
 import rgwconfig
+import colors
 
 def init_connection():
-    rgwconf = new rgwconfig()
+    rgwconf = rgwconfig.rgwconfig()
     host, access_key, secret_key = rgwconf.read_conf()
-    conn = new connection(host, access_key, secret_key)
+    conn = connection.Connection(host, access_key, secret_key)
 
 conn = init_connection()
 
@@ -17,6 +18,18 @@ class adminutils(object):
     @staticmethod
     def _print_response_msg(code, message):
         #(navneet) This method will be called by all static methods to print response to user.
+        if 200 <= code < 300:
+            print Colors.BOLD + Colors.GREEN + "%d" % code + Colors.ENDC
+            print message
+            return
+        if 400 <= code < 500:
+            print Colors.BOLD + Colors.RED + "%d" % code + Colors.ENDC
+            print message
+            return
+        if 500 <= code:
+            print Colors.BOLD + Colors.YELLOW + "%d" % code + Colors.ENDC
+            print message
+            return
 
     @staticmethod
     def create_user(uid, display_name, email=None, key_type='s3',
@@ -77,9 +90,9 @@ class adminutils(object):
         """Add a key-pair for a user"""
         if access_key and secret_key:
             generate_key = False
-        else if access_key or secret_key:
+        elif access_key or secret_key:
             raise MissingKeys
-        else
+        else:
             generate_key = True
 
         endpoint = '/admin/user'

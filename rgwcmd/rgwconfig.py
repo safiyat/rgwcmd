@@ -27,3 +27,16 @@ class rgwconfig(object):
         return host, access_key, secret_key
 
    #(navneet) Can add another method to check for existence of file and give useful message to user.
+    def get_conf(self):
+        if os.path.isfile(self.path):
+            return read_conf()
+
+        print 'No config file found at %s' % self.path
+        print 'Please enter the rgwadmin configuration...'
+        host = raw_input('    Rados Gateway Server:')
+        access_key = raw_input('    Access Key:')
+        secret_key = raw_input('    Secret Key:')
+
+        write_conf(host=host, access_key=access_key, secret_key=secret_key)
+
+        return host, access_key, secret_key

@@ -1,5 +1,9 @@
-import argparse
-
+import argparsen as argparse
+from argparse import RawTextHelpFormatter as formatter_class
+# RawDescriptionHelpFormatter
+# RawTextHelpFormatter
+# ArgumentDefaultsHelpFormatter
+# MetavarTypeHelpFormatter
 from rgwadmin import adminutils
 
 command_list = {
@@ -117,7 +121,8 @@ command_list = {
                             "dest": "suspend"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.create_user
                 }
                 },
                 {
@@ -229,7 +234,8 @@ command_list = {
                             "dest": "suspend"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.update_user
                 }
                 },
                 {
@@ -260,7 +266,8 @@ command_list = {
                             "dest": "purge"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.remove_user
                 }
                 },
                 {
@@ -278,12 +285,12 @@ command_list = {
                             "dest": "uid"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.update_user
                 }
                 }
 
              ],
-            "function" : user_func,
             "dest": "subcommand"
         }
         },
@@ -341,7 +348,8 @@ command_list = {
                             "dest": "gen_key"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.add_key
                 }
                 },
                 {
@@ -370,11 +378,11 @@ command_list = {
                             "dest": "uid"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.remove_key
                 }
                 }
             ],
-            "function" : key_func,
             "dest": "subcommand"
         }
         },
@@ -409,7 +417,8 @@ command_list = {
                             "dest": "caps"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.add_caps
                 }
                 },
                 {
@@ -439,11 +448,11 @@ command_list = {
                             "dest": "caps"
                         }
                         }
-                    ]
+                    ],
+                    "function" : adminutils.remove_caps
                 }
                 }
             ],
-            "function" : caps_func,
             "dest": "subcommand"
         }
         }
@@ -453,29 +462,33 @@ command_list = {
 
 def init_command_parser():
     parser = argparse.ArgumentParser(
-        description = 'Ceph Rados Gateway REST API on the cmd.',
-        formatter_class=argparse.RawTextHelpFormatter)
+        # description = 'Ceph Rados Gateway REST API on the cmd.',
+        # formatter_class=formatter_class)
+        description = 'Ceph Rados Gateway REST API on the cmd.')
     #(navneet) add formatter class to all parsers in subparsers.
-    subparsers = parser.add_subparsers(dest="command")
+    base_subparsers = parser.add_subparsers(dest="command")
 
     # Iterates over user, keys, caps
     for command in command_list['commands']:
-        command_parser = subparsers.add_parser(command.keys()[0])
-        
+        # command_parser = base_subparsers.add_parser(command.keys()[0],
+        #                     formatter_class=formatter_class)
+        command_parser = base_subparsers.add_parser(command.keys()[0])
         # Iterates over subcommands, function and dest
         for key, value in command.iteritems():
-            command_parser.set_defaults(func=value['function'])
             subparsers = command_parser.add_subparsers(dest=value['dest'])
             # Iterates over create, update, rm, info; etc
             for command in value['subcommands']:
+                # command_parser = subparsers.add_parser(command.keys()[0],
+                #                                  formatter_class=formatter_class)
                 command_parser = subparsers.add_parser(command.keys()[0])
                 # Iterates over a single entry in the dictionary:arguments
                 for command, properties  in command.iteritems():
                     # Iterates over arguments to a single command: uid, email...
+                    command_parser.set_defaults(func=properties['function'])
                     for argument in properties['arguments']:
                         # Iterates over kv pairs in arguments:short,long,type...
                         for key, value in argument.iteritems():
-                            print value['dest']
+                            # print value['dest']
                             command_parser.add_argument(value['short'],
                                                         value['long'],
                                                         type=value['type'],
@@ -485,8 +498,4 @@ def init_command_parser():
                                                         metavar=
                                                         value['metavar'],
                                                         dest=value['dest'])
-
-    args = parser.parse_args()
-    args.func(args)
     return parser
-
