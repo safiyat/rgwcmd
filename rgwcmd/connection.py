@@ -3,9 +3,9 @@
 import requests
 from awsauth import S3Auth
 
-class Connection:
+class Connection(object):
 
-    def __init__(self, access_key, secret_key, server, port, is_secure=False):
+    def __init__(self, server, access_key, secret_key, is_secure=False):
         self._access_key = access_key
         self._secret_key = secret_key
         self._server = server
@@ -26,12 +26,16 @@ class Connection:
     def _get_request_url(self, endpoint):
         return '%s/%s' % (self._base_url, endpoint)
 
-    def request(self, method, endpoint, **params):
+    def request_ok(self, method, endpoint, **params):
+	response = self._request(method, endpoint, **params)
+        return self._parse_response(response) 
+
+    def _request(self, method, endpoint, **params):
         """Send requests to ceph-rgw."""
         response = requests.request(method=method, url=self._get_request_url(endpoint), auth=self.auth, params=params)
         return response
 
-    def parse_response(self, response):
+    def _parse_response(self, response):
         """Parse the response of Connection.request function"""
         code = response.code
         text = response.text
