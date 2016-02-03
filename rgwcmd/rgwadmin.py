@@ -8,11 +8,14 @@ import colors
 
 def init_connection():
     rgwconf = rgwconfig.rgwconfig()
-    host, access_key, secret_key = rgwconf.read_conf()
+    host, access_key, secret_key = rgwconf.get_conf()
     conn = connection.Connection(host, access_key, secret_key)
     return conn
 
 class adminutils(object):
+
+    global conn
+    conn = init_connection()
 
     @staticmethod
     def _print_response_msg(code, message):
@@ -55,9 +58,9 @@ class adminutils(object):
                                suspended=suspended)
 
     @staticmethod
-    def update_user(uid, display_name=None, email=None, access_key=None,
-                    secret_key=None, generate_key=None, user_caps=None,
-                    max_buckets=1000, suspended=None):
+    def update_user(uid, display_name=None, email=None, key_type='S3',
+                    access_key=None, secret_key=None, generate_key=None,
+                    user_caps=None, max_buckets=1000, suspended=None):
         """Update a user."""
 
         if access_key and secret_key:
@@ -83,9 +86,14 @@ class adminutils(object):
         endpoint = '/admin/user'
         return conn.request_ok(method='DELETE', endpoint=endpoint,
 			       uid=uid, purge_data=purge_data)
+    @staticmethod
+    def info_user(uid):
+        """Delete a user."""
+        endpoint = '/admin/user'
+        return conn.request_ok(method='GET', endpoint=endpoint, uid=uid)
 
     @staticmethod
-    def add_key(uid, access_key=None, secret_key=None):
+    def add_key(uid, access_key=None, secret_key=None, generate_key=None):
         """Add a key-pair for a user"""
         if access_key and secret_key:
             generate_key = False

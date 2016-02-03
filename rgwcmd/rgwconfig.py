@@ -29,7 +29,7 @@ class rgwconfig(object):
    #(navneet) Can add another method to check for existence of file and give useful message to user.
     def get_conf(self):
         if os.path.isfile(self.path):
-            return read_conf()
+            return self.read_conf()
 
         print 'No config file found at %s' % self.path
         print 'Please enter the rgwadmin configuration...'
@@ -37,6 +37,6 @@ class rgwconfig(object):
         access_key = raw_input('    Access Key:')
         secret_key = raw_input('    Secret Key:')
 
-        write_conf(host=host, access_key=access_key, secret_key=secret_key)
+        self.write_conf(host=host, access_key=access_key, secret_key=secret_key)
 
         return host, access_key, secret_key

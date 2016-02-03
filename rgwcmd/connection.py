@@ -28,6 +28,9 @@ class Connection(object):
 
     def request_ok(self, method, endpoint, **params):
 	response = self._request(method, endpoint, **params)
+        print response.text
+        print response.status_code
+        print params
         return self._parse_response(response)
 
     def _request(self, method, endpoint, **params):
@@ -39,6 +42,6 @@ class Connection(object):
         """Parse the response of Connection.request function"""
         #(navneet) check for return codes and raise exceptions with a message
         # Can't be done. eg. NoSuchUser NoSuchBucket NoSuchKey all return 404.
-        code = response.code
+        code = response.status_code
         text = response.text
         return code, text
