@@ -24,17 +24,17 @@ class Connection(object):
         return self._base_url
 
     def _get_request_url(self, endpoint):
-        return '%s/%s' % (self._base_url, endpoint)
+        return '%s%s' % (self._base_url, endpoint)
 
     def request_ok(self, method, endpoint, **params):
 	response = self._request(method, endpoint, **params)
         print response.text
         print response.status_code
-        print params
         return self._parse_response(response)
 
     def _request(self, method, endpoint, **params):
         """Send requests to ceph-rgw."""
+        print "%s\n%s\n%s\n\n" % (method, self._get_request_url(endpoint), params)
         response = requests.request(method=method, url=self._get_request_url(endpoint), auth=self.auth, params=params)
         return response
 
