@@ -102,7 +102,7 @@ class adminutils(object):
         else:
             generate_key = True
 
-        endpoint = '/admin/user'
+        endpoint = '/admin/user?key'
         return conn.request_ok(method='PUT', endpoint=endpoint, uid=uid,
                                access_key=access_key, secret_key=secret_key,
                                generate_key=generate_key)
@@ -110,17 +110,17 @@ class adminutils(object):
     @staticmethod
     def remove_key(uid, access_key):
         """Remove a key-pair from a user"""
-        endpoint = '/admin/user'
+        endpoint = '/admin/user?key'
         return conn.request_ok(method='DELETE', endpoint=endpoint, uid=uid, access_key=access_key)
 
     @staticmethod
     def add_caps(uid, user_caps):
         """Add an administrative capability to a specified user."""
-        endpoint = '/admin/user'
+        endpoint = '/admin/user?caps'
         return conn.request_ok(method='PUT', endpoint=endpoint, uid=uid, user_caps=user_caps)
 
     @staticmethod
     def remove_caps(uid, user_caps):
         """Remove an administrative capability from a specified user."""
-        endpoint = '/admin/user'
+        endpoint = '/admin/user?caps'
         return conn.request_ok(method='DELETE', endpoint=endpoint, uid=uid, user_caps=user_caps)
