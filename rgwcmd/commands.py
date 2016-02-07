@@ -501,7 +501,10 @@ def init_command_parser():
 
 def namespace_to_dict(args):
     dictionary = vars(args)
-    dictionary.pop('func')
-    dictionary.pop('subcommand')
-    dictionary.pop('command')
+    if dictionary.has_key('func'):
+        dictionary.pop('func')
+    if dictionary.has_key('subcommand'):
+        dictionary.pop('subcommand')
+    if dictionary.has_key('command'):
+        dictionary.pop('command')
     return dictionary

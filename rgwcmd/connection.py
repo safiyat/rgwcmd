@@ -27,6 +27,13 @@ class Connection(object):
         return '%s%s' % (self._base_url, endpoint)
 
     def request_ok(self, method, endpoint, **params):
+
+        for key in params.keys():
+            oldkey = key
+            newkey = oldkey.replace('_', '-')
+            if oldkey != newkey:
+                params[newkey] = params.pop(oldkey)
+
 	response = self._request(method, endpoint, **params)
         print response.text
         print response.status_code
