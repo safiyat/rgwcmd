@@ -52,6 +52,14 @@ class AdminUtils(object):
         else:
             generate_key = True
 
+
+        if suspended == 'Y' or suspended == 'y':
+            suspended = True
+        elif suspended == 'N' or suspended == 'n':
+            suspended = False
+        else:
+            suspended = None
+
         endpoint = '/admin/user'
         return conn.request_ok(method='PUT', endpoint=endpoint, uid=uid,
                                display_name=display_name,
@@ -74,6 +82,13 @@ class AdminUtils(object):
             raise MissingKeys
         else:
             generate_key = True
+
+        if suspended == 'Y' or suspended == 'y':
+            suspended = True
+        elif suspended == 'N' or suspended == 'n':
+            suspended = False
+        else:
+            suspended = None
 
         endpoint = '/admin/user'
         return conn.request_ok(method='POST', endpoint=endpoint, uid=uid,

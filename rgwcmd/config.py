@@ -1,7 +1,6 @@
 import ConfigParser
 import os
 
-
 class ConfigHelper(object):
 
     def __init__(self, path=None):
@@ -33,7 +32,7 @@ class ConfigHelper(object):
         self.init_config()
         return self.read_conf()
 
-    def init_config():
+    def init_config(self):
         print 'Storing configuration at path %s' % self.path
         print 'Please enter the rgwadmin configuration...'
         host = raw_input('    Rados Gateway Server:')
