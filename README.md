@@ -5,16 +5,16 @@ The commandline tool `rgwcmd` provides a cmd interface to the [Rados Gateway Adm
 
 ### Working
 
-- user info
-- user rm
-- keys rm
+- user info. Pending tests.
+- user rm. Pending tests.
+- keys rm. Pending tests.
 
 
 ### Not working
 
-- user create
-- user update
+- ~~user create~~ Pending tests.
+- ~~user update~~ Pending tests.
 
 ### Issues
 
-- The keys of the params passed in the request need to modified. The '_' (underscores) of the keys need to changed to '-' (hyphens).
+- ~~The keys of the params passed in the request need to modified. The '_' (underscores) of the keys need to changed to '-' (hyphens).~~
