@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-from rgwcmd import commands, rgwconfig, connection, rgwadmin
+from rgwcmd import commands
 
 
 if __name__ == '__main__':

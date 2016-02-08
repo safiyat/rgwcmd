@@ -2,7 +2,7 @@ import ConfigParser
 import os
 
 
-class rgwconfig(object):
+class ConfigHelper(object):
 
     def __init__(self, path=None):
         if not path:
@@ -30,13 +30,13 @@ class rgwconfig(object):
     def get_conf(self):
         if os.path.isfile(self.path):
             return self.read_conf()
+        self.init_config()
+        return self.read_conf()
 
-        print 'No config file found at %s' % self.path
+    def init_config():
+        print 'Storing configuration at path %s' % self.path
         print 'Please enter the rgwadmin configuration...'
         host = raw_input('    Rados Gateway Server:')
         access_key = raw_input('    Access Key:')
         secret_key = raw_input('    Secret Key:')
-
         self.write_conf(host=host, access_key=access_key, secret_key=secret_key)
-
-        return host, access_key, secret_key

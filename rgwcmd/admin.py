@@ -3,16 +3,16 @@
 from exceptions import *
 
 import connection
-import rgwconfig
+import config
 import colors
 
 def init_connection():
-    rgwconf = rgwconfig.rgwconfig()
+    rgwconf = config.ConfigHelper()
     host, access_key, secret_key = rgwconf.get_conf()
     conn = connection.Connection(host, access_key, secret_key)
     return conn
 
-class adminutils(object):
+class AdminUtils(object):
 
     global conn
     conn = init_connection()
@@ -32,6 +32,11 @@ class adminutils(object):
             print Colors.BOLD + Colors.YELLOW + "%d" % code + Colors.ENDC
             print message
             return
+
+    @staticmethod
+    def configure():
+        rgwconf = config.ConfigHelper()
+        rgwconf.init_config()
 
     @staticmethod
     def create_user(uid, display_name, email=None, key_type='s3',

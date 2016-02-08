@@ -24,10 +24,15 @@ class Connection(object):
         return self._base_url
 
     def _get_request_url(self, endpoint):
-        return '%s%s' % (self._base_url, endpoint)
+        return '%s%s?format=json' % (self._base_url, endpoint)
+
+    def _sanitize_request_params(self, params):
+        for k in params.keys():
+            if params.get(k) is None:
+                params.pop(k)
 
     def request_ok(self, method, endpoint, **params):
-
+        self._sanitize_request_params(params)
         for key in params.keys():
             oldkey = key
             newkey = oldkey.replace('_', '-')
@@ -41,14 +46,13 @@ class Connection(object):
 
     def _request(self, method, endpoint, **params):
         """Send requests to ceph-rgw."""
-        print "%s\n%s\n%s\n\n" % (method, self._get_request_url(endpoint), params)
-        response = requests.request(method=method, url=self._get_request_url(endpoint), auth=self.auth, params=params)
+        response = requests.request(method=method,
+                                    url=self._get_request_url(endpoint),
+                                    auth=self.auth, params=params)
         return response
 
     def _parse_response(self, response):
         """Parse the response of Connection.request function"""
-        #(navneet) check for return codes and raise exceptions with a message
-        # Can't be done. eg. NoSuchUser NoSuchBucket NoSuchKey all return 404.
         code = response.status_code
         text = response.text
         return code, text

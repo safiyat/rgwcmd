@@ -1,15 +1,19 @@
-import argparsen as argparse
+import argparse
 from argparse import RawTextHelpFormatter as formatter_class
-# RawDescriptionHelpFormatter
-# RawTextHelpFormatter
-# ArgumentDefaultsHelpFormatter
-# MetavarTypeHelpFormatter
-from rgwadmin import adminutils
+from admin import AdminUtils as adminutils
 
 command_list = {
     "commands": [
         {
-
+        "config" : {
+            "subcommands": [{"edit": {"arguments": [],
+                                      "function": adminutils.configure
+                                     }
+                            }],
+            "dest": "subcommand"
+            }
+        },
+        {
         "user": {
             "subcommands": [
                 {
@@ -23,7 +27,7 @@ command_list = {
                             "type": str,
                             "required": True,
                             "help": "The user ID to be created.",
-                            "metavar": "johnny",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         },
@@ -33,9 +37,9 @@ command_list = {
                             "long": "--display-name",
                             "type": str,
                             "required": True,
-                            "help": "The display name of the user to be\
-                                     created.",
-                            "metavar": "Johnny Lever",
+                            "help": "The display name of the user to be"
+                                     "created.",
+                            "metavar": "[Display Name]",
                             "dest": "display_name"
                         }
                         },
@@ -45,9 +49,9 @@ command_list = {
                             "long": "--email",
                             "type": str,
                             "required": False,
-                            "help": "The email address associated with the\
-                                     user.",
-                            "metavar": "johnny.lever@example.com",
+                            "help": "The email address associated with the"
+                                     "user.",
+                            "metavar": "[email]",
                             "dest": "email"
                         }
                         },
@@ -58,7 +62,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "Specify access key.",
-                            "metavar": "ABCD0EF12GHIJ2K34LMN",
+                            "metavar": "[access-key]",
                             "dest": "access_key"
                         }
                         },
@@ -69,8 +73,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "Specify secret key.",
-                            "metavar": "0AbCDEFg1h2i34JklM5nop6QrSTUV+\
-                                        WxyzaBC7D8",
+                            "metavar": "[secret-key]",
                             "dest": "secret_key"
                         }
                         },
@@ -80,9 +83,9 @@ command_list = {
                             "long": "--generate-key",
                             "type": str,
                             "required": False,
-                            "help": "Generate a new key pair and add to the\
-                                     existing keyring.",
-                            "metavar": True,
+                            "help": "Generate a new key pair and add to the"
+                                     "existing keyring.",
+                            "metavar": "[Y/N]",
                             "dest": "generate_key"
                         }
                         },
@@ -92,8 +95,10 @@ command_list = {
                             "long": "--caps",
                             "type": str,
                             "required": False,
-                            "help": "User capabilities.",
-                            "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
+                            "help": "[users|buckets|metadata|usage|zone]"
+                                     "=[*|read|write|read, write]",
+                            "metavar": "[capabilities]",
+
                             "dest": "user_caps"
                         }
                         },
@@ -103,9 +108,9 @@ command_list = {
                             "long": "--max-buckets",
                             "type": str,
                             "required": False,
-                            "help": "Specify the maximum number of buckets\
-                                     the user can own.",
-                            "metavar": "500",
+                            "help": "Specify the maximum number of buckets"
+                                     "the user can own.",
+                            "metavar": "[max-buckets]",
                             "dest": "max_buckets"
                         }
                         },
@@ -115,9 +120,9 @@ command_list = {
                             "long": "--suspend",
                             "type": str,
                             "required": False,
-                            "help": "Specify whether the user should be\
-                             suspended.",
-                            "metavar": False,
+                            "help": "Specify whether the user should be"
+                                     "suspended.",
+                            "metavar": "[Y/N]",
                             "dest": "suspended"
                         }
                         }
@@ -136,7 +141,7 @@ command_list = {
                             "type": str,
                             "required": True,
                             "help": "The user ID to be created.",
-                            "metavar": "johnny",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         },
@@ -146,9 +151,9 @@ command_list = {
                             "long": "--display-name",
                             "type": str,
                             "required": False,
-                            "help": "The display name of the user to be\
-                                     created.",
-                            "metavar": "Johnny Lever",
+                            "help": "The display name of the user to be"
+                                     "created.",
+                            "metavar": "[Display Name]",
                             "dest": "display_name"
                         }
                         },
@@ -158,9 +163,9 @@ command_list = {
                             "long": "--email",
                             "type": str,
                             "required": False,
-                            "help": "The email address associated with the\
-                                     user.",
-                            "metavar": "johnny.lever@example.com",
+                            "help": "The email address associated with the"
+                                     "user.",
+                            "metavar": "[email]",
                             "dest": "email"
                         }
                         },
@@ -171,7 +176,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "Specify access key.",
-                            "metavar": "ABCD0EF12GHIJ2K34LMN",
+                            "metavar": "[access-key]",
                             "dest": "access_key"
                         }
                         },
@@ -182,8 +187,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "Specify secret key.",
-                            "metavar": "0AbCDEFg1h2i34JklM5nop6QrSTUV+\
-                                        WxyzaBC7D8",
+                            "metavar": "[secret-key]",
                             "dest": "secret_key"
                         }
                         },
@@ -193,9 +197,9 @@ command_list = {
                             "long": "--generate-key",
                             "type": str,
                             "required": False,
-                            "help": "Generate a new key pair and add to the\
-                                     existing keyring.",
-                            "metavar": True,
+                            "help": "Generate a new key pair and add to the"
+                                     "existing keyring.",
+                            "metavar": "[Y/N]",
                             "dest": "generate_key"
                         }
                         },
@@ -205,8 +209,9 @@ command_list = {
                             "long": "--caps",
                             "type": str,
                             "required": False,
-                            "help": "User capabilities.",
-                            "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
+                            "help": "[users|buckets|metadata|usage|zone]"
+                                     "=[*|read|write|read, write]",
+                            "metavar": "[capabilities]",
                             "dest": "user_caps"
                         }
                         },
@@ -216,9 +221,9 @@ command_list = {
                             "long": "--max-buckets",
                             "type": str,
                             "required": False,
-                            "help": "Specify the maximum number of buckets\
-                                     the user can own.",
-                            "metavar": "500",
+                            "help": "Specify the maximum number of buckets"
+                                     "the user can own.",
+                            "metavar": "[max-buckets]",
                             "dest": "max_buckets"
                         }
                         },
@@ -228,9 +233,9 @@ command_list = {
                             "long": "--suspend",
                             "type": str,
                             "required": False,
-                            "help": "Specify whether the user should be\
-                             suspended.",
-                            "metavar": False,
+                            "help": "Specify whether the user should be"
+                                     "suspended.",
+                            "metavar": "[Y/N]",
                             "dest": "suspended"
                         }
                         }
@@ -249,7 +254,7 @@ command_list = {
                             "type": str,
                             "required": True,
                             "help": "The user ID to be created.",
-                            "metavar": "johnny",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         },
@@ -259,10 +264,10 @@ command_list = {
                             "long": "--purge-data",
                             "type": str,
                             "required": False,
-                            "help": "When specified the buckets and objects\
-                                     belonging to the user will also be\
-                                     removed.",
-                            "metavar": True,
+                            "help": "When specified the buckets and objects"
+                                     "belonging to the user will also be"
+                                     "removed.",
+                            "metavar": "[Y/N]",
                             "dest": "purge_data"
                         }
                         }
@@ -281,7 +286,7 @@ command_list = {
                             "type": str,
                             "required": True,
                             "help": "The user ID to be created.",
-                            "metavar": "johnny",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         }
@@ -309,7 +314,7 @@ command_list = {
                             "type": str,
                             "required": True,
                             "help": "The user ID to receive the new key.",
-                            "metavar": "johnny",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         },
@@ -320,7 +325,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "Specify access key.",
-                            "metavar": "ABCD0EF12GHIJ2K34LMN",
+                            "metavar": "[access-key]",
                             "dest": "access_key"
                         }
                         },
@@ -331,8 +336,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "Specify secret key.",
-                            "metavar": "0AbCDEFg1h2i34JklM5nop6QrSTUV+\
-                                        WxyzaBC7D8",
+                            "metavar": "[secret-key]",
                             "dest": "secret_key"
                         }
                         },
@@ -342,9 +346,9 @@ command_list = {
                             "long": "--generate-key",
                             "type": str,
                             "required": False,
-                            "help": "Generate a new key pair and add to the\
-                                     existing keyring.",
-                            "metavar": True,
+                            "help": "Generate a new key pair and add to the"
+                                     "existing keyring.",
+                            "metavar": "[Y/N]",
                             "dest": "generate_key"
                         }
                         }
@@ -363,7 +367,7 @@ command_list = {
                             "type": str,
                             "required": True,
                             "help": "Specify access key.",
-                            "metavar": "ABCD0EF12GHIJ2K34LMN",
+                            "metavar": "[access-key]",
                             "dest": "access_key"
                         }
                         },
@@ -374,7 +378,7 @@ command_list = {
                             "type": str,
                             "required": False,
                             "help": "The user ID to remove the key from.",
-                            "metavar": "johnny",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         }
@@ -400,9 +404,8 @@ command_list = {
                             "long": "--uid",
                             "type": str,
                             "required": True,
-                            "help": "The user ID to add the capabilities\
-                                     to.",
-                            "metavar": "johnny",
+                            "help": "The user ID to add the capabilities to.",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         },
@@ -412,8 +415,9 @@ command_list = {
                             "long": "--caps",
                             "type": str,
                             "required": True,
-                            "help": "User capabilities.",
-                            "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
+                            "help": "[users|buckets|metadata|usage|zone]"
+                                     "=[*|read|write|read, write]",
+                            "metavar": "[capabilities]",
                             "dest": "user_caps"
                         }
                         }
@@ -431,9 +435,9 @@ command_list = {
                             "long": "--uid",
                             "type": str,
                             "required": False,
-                            "help": "The user ID to remove the capabilities\
-                                     from.",
-                            "metavar": "johnny",
+                            "help": "The user ID to remove the capabilities"
+                                     "from.",
+                            "metavar": "[uid]",
                             "dest": "uid"
                         }
                         },
@@ -443,8 +447,9 @@ command_list = {
                             "long": "--caps",
                             "type": str,
                             "required": True,
-                            "help": "User capabilities.",
-                            "metavar": "\"[users|buckets|metadata|usage|zone]=[*|read|write|read, write]\"",
+                            "help": "[users|buckets|metadata|usage|zone]"
+                                     "=[*|read|write|read, write]",
+                            "metavar": "[capabilities]",
                             "dest": "user_caps"
                         }
                         }
@@ -461,26 +466,21 @@ command_list = {
 }
 
 def init_command_parser():
-    parser = argparse.ArgumentParser(
-        # description = 'Ceph Rados Gateway REST API on the cmd.',
-        # formatter_class=formatter_class)
-        description = 'Ceph Rados Gateway REST API on the cmd.')
-    #(navneet) add formatter class to all parsers in subparsers.
+    parser = argparse.ArgumentParser(formatter_class=formatter_class,
+                        description = 'Ceph Rados Gateway REST API on the cmd.')
     base_subparsers = parser.add_subparsers(dest="command")
 
     # Iterates over user, keys, caps
     for command in command_list['commands']:
-        # command_parser = base_subparsers.add_parser(command.keys()[0],
-        #                     formatter_class=formatter_class)
-        command_parser = base_subparsers.add_parser(command.keys()[0])
+        command_parser = base_subparsers.add_parser(command.keys()[0],
+                                                formatter_class=formatter_class)
         # Iterates over subcommands, function and dest
         for key, value in command.iteritems():
             subparsers = command_parser.add_subparsers(dest=value['dest'])
             # Iterates over create, update, rm, info; etc
             for command in value['subcommands']:
-                # command_parser = subparsers.add_parser(command.keys()[0],
-                #                                  formatter_class=formatter_class)
-                command_parser = subparsers.add_parser(command.keys()[0])
+                command_parser = subparsers.add_parser(command.keys()[0],
+                                                formatter_class=formatter_class)
                 # Iterates over a single entry in the dictionary:arguments
                 for command, properties  in command.iteritems():
                     # Iterates over arguments to a single command: uid, email...
