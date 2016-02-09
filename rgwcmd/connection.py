@@ -24,7 +24,7 @@ class Connection(object):
         return self._base_url
 
     def _get_request_url(self, endpoint):
-        return '%s%s?format=json' % (self._base_url, endpoint)
+        return '%s%s' % (self._base_url, endpoint)
 
     def _sanitize_request_params(self, params):
         for k in params.keys():
@@ -38,6 +38,7 @@ class Connection(object):
             newkey = oldkey.replace('_', '-')
             if oldkey != newkey:
                 params[newkey] = params.pop(oldkey)
+        params['format']='json'
 
 	response = self._request(method, endpoint, **params)
         print response.text

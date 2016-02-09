@@ -42,7 +42,7 @@ class AdminUtils(object):
     def create_user(uid, display_name, email=None, key_type='s3',
                     access_key=None, secret_key=None, user_caps=None,
                     generate_key=True, max_buckets=1000, suspended=False):
-        """Create a new user. By default, an S3 key pair will be created\
+        """Create a new user. By default, an s3 key pair will be created\
            automatically."""
 
         if access_key and secret_key:
@@ -71,7 +71,7 @@ class AdminUtils(object):
                                suspended=suspended)
 
     @staticmethod
-    def update_user(uid, display_name=None, email=None, key_type='S3',
+    def update_user(uid, display_name=None, email=None, key_type='s3',
                     access_key=None, secret_key=None, generate_key=None,
                     user_caps=None, max_buckets=1000, suspended=None):
         """Update a user."""
@@ -80,7 +80,7 @@ class AdminUtils(object):
             generate_key = False
         elif access_key or secret_key:
             raise MissingKeys
-        else:
+        elif generate_key == 'Y' or generate_key == 'y':
             generate_key = True
 
         if suspended == 'Y' or suspended == 'y':

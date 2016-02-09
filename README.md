@@ -5,15 +5,9 @@ The commandline tool `rgwcmd` provides a cmd interface to the [Rados Gateway Adm
 
 ### Working
 
-- user info. Pending tests.
-- user rm. Pending tests.
-- keys rm. Pending tests.
-
-
 ### Not working
 
-- ~~user create~~ Pending tests.
-- ~~user update~~ Pending tests.
+- user update -c
 
 ### Issues
 
