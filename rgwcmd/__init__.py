@@ -1,6 +1,6 @@
 """Ceph RADOS Gateway (radosgw) admin operations."""
 
-__version__ = '0.1'
+__version__ = '0.2'
 __author__ = 'md.reza@snapdeal.com'
 
 def get_version():
