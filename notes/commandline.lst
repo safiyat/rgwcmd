@@ -1,6 +1,0 @@
-from rgwadmin import RGWAdmin
-
-rgw = RGWAdmin(access_key='JENALIXO7KDHNV4YDM14', secret_key='RWqST5b7N3SPxUoqxzavinGANcpOMlVeDxzhxCCs', admin='rgwadmin', server='10.41.0.95:5000', secure=True)
-# Base URL: https://10.41.0.95:5000
-
-rgw = RGWAdmin(access_key='JENALIXO7KDHNV4YDM14', secret_key='RWqST5b7N3SPxUoqxzavinGANcpOMlVeDxzhxCCs', admin='rgwadmin', server='10.41.0.95:5000', secure=False)
