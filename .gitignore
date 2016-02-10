@@ -1,9 +1,7 @@
-rgwcmd-venv/
-venv/
+*venv/
 *test.py
 *.pyc
-standalone.py
 *.swp
-*#
-*.#*
-rgwcmd/argparsen.py
+*#*
+dist/
+rgwcmd.egg-info/
