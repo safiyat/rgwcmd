@@ -12,7 +12,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(path.join(here, 'rgwcmd/README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -48,9 +48,9 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
     install_requires=[
-        'argparse==1.2.1',
-        'requests==2.9.1',
-        'requests-aws==0.1.8'
+        'argparse>=1.2.1',
+        'requests>=2.9.1',
+        'requests-aws>=0.1.8'
     ],
 
     extras_require={
