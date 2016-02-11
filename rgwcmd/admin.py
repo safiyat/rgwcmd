@@ -35,9 +35,9 @@ class AdminUtils(object):
         rgwconf.init_config()
 
     @staticmethod
-    def create_user(uid, display_name, email=None, key_type='s3',
+    def create_user(uid, display_name, email=None, key_type=None,
                     access_key=None, secret_key=None, user_caps=None,
-                    generate_key=True, max_buckets=1000, suspended=False):
+                    generate_key=None, max_buckets=None, suspended=None):
         """Create a new user. By default, an s3 key pair will be created\
            automatically."""
 
@@ -45,8 +45,12 @@ class AdminUtils(object):
             generate_key = False
         elif access_key or secret_key:
             raise MissingKeys
-        else:
+        elif generate_key == 'Y' or generate_key == 'y':
             generate_key = True
+        elif generate_key == 'N' or generate_key == 'n':
+            generate_key = False
+        else:
+            generate_key = None
 
 
         if suspended == 'Y' or suspended == 'y':
@@ -68,9 +72,9 @@ class AdminUtils(object):
                                             suspended=suspended)
 
     @staticmethod
-    def update_user(uid, display_name=None, email=None, key_type='s3',
+    def update_user(uid, display_name=None, email=None, key_type=None,
                     access_key=None, secret_key=None, generate_key=None,
-                    user_caps=None, max_buckets=1000, suspended=None):
+                    user_caps=None, max_buckets=None, suspended=None):
         """Update a user."""
 
         if access_key and secret_key:
@@ -79,6 +83,10 @@ class AdminUtils(object):
             raise MissingKeys
         elif generate_key == 'Y' or generate_key == 'y':
             generate_key = True
+        elif generate_key == 'N' or generate_key == 'n':
+            generate_key = False
+        else:
+            generate_key = None
 
         if suspended == 'Y' or suspended == 'y':
             suspended = True
@@ -129,7 +137,7 @@ class AdminUtils(object):
                                             generate_key=generate_key)
 
     @staticmethod
-    def remove_key(uid, access_key):
+    def remove_key(access_key, uid=None):
         """Remove a key-pair from a user"""
         endpoint = '/admin/user?key'
         return init_connection().request_ok(method='DELETE', endpoint=endpoint,
