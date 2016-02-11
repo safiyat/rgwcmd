@@ -25,7 +25,6 @@ class ConfigHelper(object):
         secret_key = self.conf.get('rgwadmin', 'secret-key')
         return host, access_key, secret_key
 
-   #(navneet) Can add another method to check for existence of file and give useful message to user.
     def get_conf(self):
         if os.path.isfile(self.path):
             return self.read_conf()
