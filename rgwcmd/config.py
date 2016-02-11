@@ -29,8 +29,9 @@ class ConfigHelper(object):
     def get_conf(self):
         if os.path.isfile(self.path):
             return self.read_conf()
-        self.init_config()
-        return self.read_conf()
+        print 'ERROR: Config file not found at /home/safiyat/.rgwadmin. Please'\
+               'run `config edit\' first.'
+        exit()
 
     def init_config(self):
         print 'Storing configuration at path %s' % self.path
