@@ -5,7 +5,7 @@ The commandline tool `rgwcmd` provides a cmd interface to the [Rados Gateway Adm
 ### To Do
 
 - Provide API for metadata (user list).
-- Pretty-print the returned data.
+- ~~Pretty-print the returned data.~~
 - ~~Allow a cmd parameter to change the config file location for the current operation.~~
 
 ### Issues

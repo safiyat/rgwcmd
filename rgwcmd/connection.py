@@ -1,6 +1,7 @@
 """Connections to a Ceph RADOS Gateway (radosgw) service."""
 
 import requests
+import json
 from awsauth import S3Auth
 
 class Connection(object):
@@ -41,7 +42,7 @@ class Connection(object):
         params['format']='json'
 
 	response = self._request(method, endpoint, **params)
-        print response.text
+        print json.dumps(json.loads(response.text), indent=4)
         print response.status_code
         return self._parse_response(response)
 
