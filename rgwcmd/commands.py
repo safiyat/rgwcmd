@@ -125,6 +125,18 @@ command_list = {
                             "metavar": "[Y/N]",
                             "dest": "suspended"
                         }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
+                        }
                         }
                     ],
                     "function" : adminutils.create_user
@@ -238,6 +250,18 @@ command_list = {
                             "metavar": "[Y/N]",
                             "dest": "suspended"
                         }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
+                        }
                         }
                     ],
                     "function" : adminutils.update_user
@@ -270,6 +294,18 @@ command_list = {
                             "metavar": "[Y/N]",
                             "dest": "purge_data"
                         }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
+                        }
                         }
                     ],
                     "function" : adminutils.remove_user
@@ -288,6 +324,18 @@ command_list = {
                             "help": "The user ID to be created.",
                             "metavar": "[uid]",
                             "dest": "uid"
+                        }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
                         }
                         }
                     ],
@@ -351,6 +399,18 @@ command_list = {
                             "metavar": "[Y/N]",
                             "dest": "generate_key"
                         }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
+                        }
                         }
                     ],
                     "function" : adminutils.add_key
@@ -380,6 +440,18 @@ command_list = {
                             "help": "The user ID to remove the key from.",
                             "metavar": "[uid]",
                             "dest": "uid"
+                        }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
                         }
                         }
                     ],
@@ -420,6 +492,18 @@ command_list = {
                             "metavar": "[capabilities]",
                             "dest": "user_caps"
                         }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
+                        }
                         }
                     ],
                     "function" : adminutils.add_caps
@@ -451,6 +535,18 @@ command_list = {
                                      "=[*|read|write|read, write]",
                             "metavar": "[capabilities]",
                             "dest": "user_caps"
+                        }
+                        },
+                        {
+                        "config" : {
+                            "short": "-i",
+                            "long": "--input-file",
+                            "type": str,
+                            "required": False,
+                            "help": "Specify a new file to read the config from,"
+                                     "instead of the default path.",
+                            "metavar": "/config/file/path",
+                            "dest": "path"
                         }
                         }
                     ],
