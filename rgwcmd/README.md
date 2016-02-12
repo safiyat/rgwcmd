@@ -10,7 +10,7 @@ The commandline tool `rgwcmd` provides a cmd interface to the [Rados Gateway Adm
 
 ### Issues
 
-- Getting 403 on production. `AccessKeyMismatch`
+- Getting 403 on production. `SignatureDoesNotMatch`
 - "user update -c" doesn't work.
 - User creation by a uid already created ends up adding keys to it.
 - ~~Config creation precedes every other activity. Even config creation itself!~~
