@@ -4,6 +4,15 @@ import requests
 import json
 from awsauth import S3Auth
 
+import logging
+import httplib
+httplib.HTTPConnection.debuglevel = 1
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
+
 class Connection(object):
 
     def __init__(self, server, access_key, secret_key, is_secure=False):
@@ -42,8 +51,8 @@ class Connection(object):
         params['format']='json'
 
 	response = self._request(method, endpoint, **params)
-        print json.dumps(json.loads(response.text), indent=4)
-        print response.status_code
+        # print json.dumps(json.loads(response.text), indent=4)
+        # print response.status_code
         return self._parse_response(response)
 
     def _request(self, method, endpoint, **params):
